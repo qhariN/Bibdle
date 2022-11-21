@@ -1,44 +1,32 @@
 <script lang="ts">
-  import svelteLogo from './assets/svelte.svg'
-  import Counter from './lib/Counter.svelte'
+  import Board from './lib/Board.svelte'
+  import Keyboard from './lib/Keyboard.svelte'
 </script>
 
-<main>
-  <div class="flex justify-center">
-    <a href="https://vitejs.dev" target="_blank"> 
-      <img src="/vite.svg" class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank"> 
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
-  </div>
-
-  <div class="card">
-    <Counter />
-  </div>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank">SvelteKit</a>, the official Svelte app framework powered by Vite!
-  </p>
-
-  <p class="read-the-docs">
-    Click on the Vite and Svelte logos to learn more
-  </p>
-</main>
-
-<style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
-  }
-</style>
+<div class="flex flex-col w-full h-screen">
+  <header class="flex">
+    <div>
+      <button>random</button>
+      <button>show word</button>
+    </div>
+    <div class="ml-auto">
+      <button>dark mode</button>
+      <button>help</button>
+      <button>config</button>
+    </div>
+  </header>
+  <main class="grow flex justify-center items-center">
+    <div class="w-full max-w-screen-md flex flex-col items-center gap-8">
+      <div class="flex justify-center text-7xl text-[#7bb64f] font-[1000]">
+        <span class="-rotate-12">B</span>
+        <span class="mt-1">I</span>
+        <span class="rotate-12">B</span>
+        <span class="-rotate-6 text-[#7a6bcf]">D</span>
+        <span class="mt-1">L</span>
+        <span class="rotate-12">E</span>
+      </div>
+      <Board />
+    </div>
+  </main>
+  <Keyboard />
+</div>
