@@ -1,20 +1,11 @@
 <script lang="ts">
+  import Menu from './lib/Menu.svelte';
   import Board from './lib/Board.svelte'
   import Keyboard from './lib/Keyboard.svelte'
 </script>
 
 <div class="flex flex-col w-full h-screen">
-  <header class="flex">
-    <div>
-      <button>random</button>
-      <button>show word</button>
-    </div>
-    <div class="ml-auto">
-      <button>dark mode</button>
-      <button>help</button>
-      <button>config</button>
-    </div>
-  </header>
+  <Menu />
   <main class="grow flex justify-center items-center">
     <div class="w-full max-w-screen-md flex flex-col items-center gap-8">
       <div class="flex justify-center text-7xl text-[#7bb64f] font-[1000]">
