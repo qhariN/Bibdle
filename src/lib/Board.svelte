@@ -1,46 +1,38 @@
+<script lang="ts">
+  import { onMount } from "svelte";
+
+  export let x = 5
+  export let y = 6
+
+  let words: string[][] = Array.from(Array(y), () => new Array(x))
+  let nextWord: string[] = Array.from(Array(x))
+
+  onMount(() => {
+    words[0] = ["A", "B", "C", "D", "E"]
+  })
+
+  const emptyWord = (letters: string[]):boolean => {
+    const word = letters.join('')
+    return word === ''
+  }
+
+  $: firstEmptyWordIndex = () => words.findIndex(emptyWord)
+</script>
+
 <div class="space-y-2">
-  <div class="board-row">
-    <div class="!bg-[#978bd2]">L</div>
-    <div>O</div>
-    <div>V</div>
-    <div>E</div>
-    <div>R</div>
-  </div>
-  <div class="board-row">
-    <div>P</div>
-    <div>R</div>
-    <div class="!bg-[#80bc51]">I</div>
-    <div>M</div>
-    <div>E</div>
-  </div>
-  <div class="board-row">
-    <div>D</div>
-    <div>O</div>
-    <div class="!bg-[#978bd2]">L</div>
-    <div class="!bg-[#80bc51]">L</div>
-    <div class="!bg-[#978bd2]">S</div>
-  </div>
-  <div class="board-row">
-    <div class="!bg-[#80bc51]">S</div>
-    <div class="!bg-[#80bc51]">W</div>
-    <div>E</div>
-    <div>E</div>
-    <div>T</div>
-  </div>
-  <div class="board-row">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-  <div class="board-row">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
+  {#each words as word, i}
+    <div class="board-row">
+      {#if emptyWord(word) && i === firstEmptyWordIndex()}
+        {#each nextWord as letter}
+          <div class="!bg-[#978bd2]">{letter || ''}</div>
+        {/each}
+      {:else}
+        {#each word as letter}
+          <div>{letter || ''}</div>
+        {/each}
+      {/if}
+    </div>
+  {/each}
 </div>
 
 <style lang="postcss">
