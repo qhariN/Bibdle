@@ -1,30 +1,63 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount } from 'svelte'
+  import { words } from './store'
 
   export let x = 5
   export let y = 6
 
-  let words: string[][] = Array.from(Array(y), () => new Array(x))
   let nextWord: string[] = Array.from(Array(x))
 
+  $: firstEmptyWordIndex = () => $words.findIndex(isEmptyWord)
+
   onMount(() => {
-    words[0] = ["A", "B", "C", "D", "E"]
+    words.set(Array.from(Array(y), () => new Array(x)))
+    document.addEventListener("keydown", pushKey)
   })
 
-  const emptyWord = (letters: string[]):boolean => {
+  const isEmptyWord = (letters: string[]):boolean => {
     const word = letters.join('')
     return word === ''
   }
 
-  $: firstEmptyWordIndex = () => words.findIndex(emptyWord)
+  const pushKey = ({ key }: KeyboardEvent) => {
+    const isLetter = key.length === 1 && key.match(/[a-z]/i)
+    const isBackspace = key === "Backspace"
+    const isEnter = key === "Enter"
+
+    if (isBackspace) {
+      for (let i = x - 1; i >= 0; i--) {
+        if (nextWord[i] !== undefined) {
+          nextWord[i] = undefined
+          break
+        }
+      }
+    }
+    if (isEnter) {
+      for (let i = 0; i < y; i++) {
+        if ($words[i][0] === undefined) {
+          $words[i] = nextWord
+          nextWord = Array.from(Array(x))
+          break
+        }
+      }
+    }
+    if (isLetter) {
+      for (let i = 0; i < x; i++) {
+        if (nextWord[i] === undefined) {
+          nextWord[i] = key.toUpperCase()
+          break
+        }
+      }
+    }
+  }
 </script>
 
 <div class="space-y-2">
-  {#each words as word, i}
+  {#each $words as word, i}
     <div class="board-row">
-      {#if emptyWord(word) && i === firstEmptyWordIndex()}
+      {#if isEmptyWord(word) && i === firstEmptyWordIndex()}
         {#each nextWord as letter}
-          <div class="!bg-[#978bd2]">{letter || ''}</div>
+          <div class="!bg-[#afadb0]">{letter || ''}</div>
         {/each}
       {:else}
         {#each word as letter}
