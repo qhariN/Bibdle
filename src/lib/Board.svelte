@@ -4,6 +4,7 @@
 
   export let x = 5
   export let y = 6
+  export let randomWord: string
 
   let nextWord: string[] = Array.from(Array(x))
 
@@ -33,12 +34,9 @@
       }
     }
     if (isEnter) {
-      for (let i = 0; i < y; i++) {
-        if ($words[i][0] === undefined) {
-          $words[i] = nextWord
-          nextWord = Array.from(Array(x))
-          break
-        }
+      if (nextWord.join('').length === x) {
+        $words[firstEmptyWordIndex()] = nextWord
+        nextWord = Array.from(Array(x))
       }
     }
     if (isLetter) {
@@ -48,6 +46,16 @@
           break
         }
       }
+    }
+  }
+
+  const letterHighlight = (letter: string, index: number) => {
+    if (randomWord[index] === letter) {
+      return 'bg-[#80bc51]'
+    } else if (randomWord.includes(letter)) {
+      return 'bg-[#978bd2]'
+    } else {
+      return 'bg-[#c3c3c9]'
     }
   }
 </script>
@@ -60,8 +68,8 @@
           <div class="!bg-[#afadb0]">{letter || ''}</div>
         {/each}
       {:else}
-        {#each word as letter}
-          <div>{letter || ''}</div>
+        {#each word as letter, j}
+          <div class={letter && letterHighlight(letter, j)}>{letter || ''}</div>
         {/each}
       {/if}
     </div>
@@ -73,7 +81,7 @@
     @apply flex gap-2;
   }
   .board-row > div {
-    @apply w-14 h-14 rounded-full bg-[#c3c3c9] text-3xl font-extrabold flex justify-center items-center;
+    @apply w-14 h-14 rounded-full text-3xl font-extrabold flex justify-center items-center;
   }
   .board-row > div:empty {
     @apply bg-[#afadb0];

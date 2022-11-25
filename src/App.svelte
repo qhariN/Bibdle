@@ -1,7 +1,18 @@
 <script lang="ts">
-  import Menu from './lib/Menu.svelte';
+  import type { BibleWord } from './interfaces/bible-word'
+  import Menu from './lib/Menu.svelte'
   import Board from './lib/Board.svelte'
   import Keyboard from './lib/Keyboard.svelte'
+  import bibleWords from './assets/bible-words.json'
+
+  const setRandomWord = () => {
+    const randomIndex = Math.floor(Math.random() * bibleWords.length)
+    const randomWord: BibleWord = bibleWords[randomIndex]
+    randomWord.formattedName = randomWord.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    return randomWord
+  }
+
+  let word: BibleWord = setRandomWord()
 </script>
 
 <div class="flex flex-col w-full h-screen">
@@ -16,7 +27,7 @@
         <span class="mt-1">L</span>
         <span class="rotate-12">E</span>
       </div>
-      <Board />
+      <Board randomWord={word.name} x={word.name.length} />
     </div>
   </main>
   <Keyboard />
