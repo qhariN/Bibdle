@@ -4,6 +4,8 @@
   import Board from './lib/Board.svelte'
   import Keyboard from './lib/Keyboard.svelte'
   import bibleWords from './assets/bible-words.json'
+  import { confetti } from '@neoconfetti/svelte'
+  import { gameOver } from './lib/store'
 
   const setRandomWord = () => {
     const randomIndex = Math.floor(Math.random() * bibleWords.length)
@@ -19,15 +21,20 @@
   <Menu />
   <main class="grow flex justify-center items-center">
     <div class="w-full max-w-screen-md flex flex-col items-center gap-8">
-      <div class="flex justify-center text-7xl text-[#7bb64f] font-[1000]">
-        <span class="-rotate-12">B</span>
-        <span class="mt-1">I</span>
-        <span class="rotate-12">B</span>
-        <span class="-rotate-6 text-[#7a6bcf]">D</span>
-        <span class="mt-1">L</span>
-        <span class="rotate-12">E</span>
+      <div class="flex flex-col items-center">
+        {#if $gameOver}
+          <div use:confetti={{ colors: ['#7bb64f', '#7a6bcf', '#80bc51', '#978bd2', '#afadb0'] }} />
+        {/if}
+        <div class="flex justify-center text-7xl text-[#7bb64f] font-[1000]">
+          <span class="-rotate-12">B</span>
+          <span class="mt-1">I</span>
+          <span class="rotate-12">B</span>
+          <span class="-rotate-6 text-[#7a6bcf]">D</span>
+          <span class="mt-1">L</span>
+          <span class="rotate-12">E</span>
+        </div>
       </div>
-      <Board randomWord={word.name} x={word.name.length} />
+      <Board randomWord={word.formattedName} x={word.formattedName.length} />
     </div>
   </main>
   <Keyboard />

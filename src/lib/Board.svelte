@@ -1,6 +1,7 @@
 <script lang="ts">
+  import type { Letter } from 'src/interfaces/letter'
   import { onMount } from 'svelte'
-  import { words } from './store'
+  import { gameOver, words } from './store'
 
   export let x = 5
   export let y = 6
@@ -11,16 +12,17 @@
   $: firstEmptyWordIndex = () => $words.findIndex(isEmptyWord)
 
   onMount(() => {
+    console.log(randomWord)
     words.set(Array.from(Array(y), () => new Array(x)))
     document.addEventListener("keydown", pushKey)
   })
 
-  const isEmptyWord = (letters: string[]):boolean => {
-    const word = letters.join('')
-    return word === ''
+  const isEmptyWord = (letters: Letter[]):boolean => {
+    return typeof letters[0] === "undefined"
   }
 
   const pushKey = ({ key }: KeyboardEvent) => {
+    if ($gameOver) return
     const isLetter = key.length === 1 && key.match(/[a-z]/i)
     const isBackspace = key === "Backspace"
     const isEnter = key === "Enter"
@@ -35,8 +37,16 @@
     }
     if (isEnter) {
       if (nextWord.join('').length === x) {
-        $words[firstEmptyWordIndex()] = nextWord
+        const word = nextWord.map((letter, i) => ({
+          name: letter,
+          matched: letter === randomWord[i],
+          belong: nextWord.filter((l, i) => l === randomWord[i] && l === letter).length < randomWord.split('').filter(l => l === letter).length
+            ? randomWord.includes(letter)
+            : false
+        }))
+        $words[firstEmptyWordIndex()] = word
         nextWord = Array.from(Array(x))
+        if (word.every(l => l.matched)) gameOver.set(true)
       }
     }
     if (isLetter) {
@@ -48,16 +58,6 @@
       }
     }
   }
-
-  const letterHighlight = (letter: string, index: number) => {
-    if (randomWord[index] === letter) {
-      return 'bg-[#80bc51]'
-    } else if (randomWord.includes(letter)) {
-      return 'bg-[#978bd2]'
-    } else {
-      return 'bg-[#c3c3c9]'
-    }
-  }
 </script>
 
 <div class="space-y-2">
@@ -65,11 +65,11 @@
     <div class="board-row">
       {#if isEmptyWord(word) && i === firstEmptyWordIndex()}
         {#each nextWord as letter}
-          <div class="!bg-[#afadb0]">{letter || ''}</div>
+          <div class="bg-[#afadb0]">{letter || ''}</div>
         {/each}
       {:else}
         {#each word as letter, j}
-          <div class={letter && letterHighlight(letter, j)}>{letter || ''}</div>
+          <div class="letter" class:letter-belong={letter?.belong} class:letter-matched={letter?.matched}>{letter?.name || ''}</div>
         {/each}
       {/if}
     </div>
@@ -83,7 +83,16 @@
   .board-row > div {
     @apply w-14 h-14 rounded-full text-3xl font-extrabold flex justify-center items-center;
   }
-  .board-row > div:empty {
+  .letter {
+    @apply bg-[#c3c3c9];
+  }
+  .letter:empty {
     @apply bg-[#afadb0];
+  }
+  .letter-belong {
+    @apply bg-[#978bd2];
+  }
+  .letter-matched {
+    @apply bg-[#80bc51];
   }
 </style>

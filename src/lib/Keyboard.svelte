@@ -7,7 +7,7 @@
     ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
   ]
 
-  $: usedKeys = new Set($words.flat())
+  $: usedKeys = new Set($words.flat().map(({ name }) => name))
   $: isUsedKey = (key: string) => usedKeys.has(key)
 </script>
 
