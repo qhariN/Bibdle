@@ -7,6 +7,8 @@
   import { confetti } from '@neoconfetti/svelte'
   import { gameOver } from './lib/store'
 
+  let board
+
   const setRandomWord = () => {
     const randomIndex = Math.floor(Math.random() * bibleWords.length)
     const randomWord: BibleWord = bibleWords[randomIndex]
@@ -34,8 +36,8 @@
           <span class="rotate-12">E</span>
         </div>
       </div>
-      <Board randomWord={word.formattedName} x={word.formattedName.length} />
+      <Board bind:this={board} randomWord={word.formattedName} x={word.formattedName.length} />
     </div>
   </main>
-  <Keyboard />
+  <Keyboard on:pushKey={board.pushKey} />
 </div>

@@ -21,9 +21,10 @@
     return typeof letters[0] === "undefined"
   }
 
-  const pushKey = ({ key }: KeyboardEvent) => {
+  export const pushKey = (event: KeyboardEvent | CustomEvent) => {
     if ($gameOver) return
-    const isLetter = key.length === 1 && key.match(/[a-z]/i)
+    const key = (event as KeyboardEvent).key || (event as CustomEvent).detail
+    const isLetter = key.length === 1 && key.match(/[ña-z]/i)
     const isBackspace = key === "Backspace"
     const isEnter = key === "Enter"
 
