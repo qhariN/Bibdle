@@ -4,6 +4,22 @@
   import darkModeSvg from '../assets/dark-mode.svg'
   import helpSvg from '../assets/help.svg'
   import settingsSvg from '../assets/settings.svg'
+
+  let darkMode = document.documentElement.classList.contains('dark')
+
+  $: {
+    if (darkMode) {
+      localStorage.theme = 'dark'
+      document.documentElement.classList.add('dark')
+    } else {
+      localStorage.theme = 'light'
+      document.documentElement.classList.remove('dark')
+    }
+  }
+
+  const toggleDarkMode = () => {
+    darkMode = !darkMode
+  }
 </script>
 
 <header class="flex px-12 py-6">
@@ -16,7 +32,7 @@
     </button>
   </div>
   <div class="flex gap-3 ml-auto">
-    <button type="button">
+    <button on:click={toggleDarkMode} type="button">
       <img src={darkModeSvg} width="24" height="24" alt="moon" title="Modo oscuro">
     </button>
     <button type="button">

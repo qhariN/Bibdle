@@ -6,8 +6,17 @@
   import bibleWords from './assets/bible-words.json'
   import { confetti } from '@neoconfetti/svelte'
   import { gameOver } from './lib/store'
+  import { onMount } from 'svelte'
 
   let board
+
+  onMount(() => {
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  })
 
   const setRandomWord = () => {
     const randomIndex = Math.floor(Math.random() * bibleWords.length)
