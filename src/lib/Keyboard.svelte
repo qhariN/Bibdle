@@ -16,11 +16,11 @@
   const pushKey = (key: string) => dispatch('pushKey', key)
 </script>
 
-<footer class="p-7">
+<footer>
   {#each keys as row}
     <div class="flex justify-center">
       {#each row as key}
-        <button on:click={() => pushKey(key)} class:enter={key === 'Enter'} class:key-used={isUsedKey(key)} class="flex justify-center items-center" type="button">
+        <button on:click={() => pushKey(key)} class:enter={key === 'Enter'} class:key-used={isUsedKey(key)} type="button">
           {#if key === 'Backspace'}
             <img src={backspaceSvg} width="20" height="20" alt="backspace" class="mb-[2px] mr-[4px]">
           {:else}
@@ -34,13 +34,16 @@
 
 <style lang="postcss">
   footer {
-    background-color: #c7c7cc;
+    @apply bg-lavenderGray gdark:bg-onyx p-7;
   }
   button {
-    @apply w-10 h-10 font-extrabold uppercase;
+    @apply w-10 h-10 font-extrabold uppercase gdark:text-silverFoil;
+  }
+  button:has(img) {
+    @apply flex justify-center items-center;
   }
   .enter {
-    @apply text-sm w-20;
+    @apply text-sm text-center w-20;
   }
   .key-used {
     color: #308519;

@@ -28,7 +28,7 @@
   let word: BibleWord = setRandomWord()
 </script>
 
-<div class="flex flex-col w-full h-screen">
+<div class="flex flex-col w-full h-screen dark:bg-raisinBlack dark:text-lightGray">
   <Menu />
   <main class="grow flex justify-center items-center">
     <div class="w-full max-w-screen-md flex flex-col items-center gap-8">
@@ -36,11 +36,11 @@
         {#if $gameOver}
           <div use:confetti={{ colors: ['#7bb64f', '#7a6bcf', '#80bc51', '#978bd2', '#afadb0'] }} />
         {/if}
-        <div class="flex justify-center text-7xl text-[#7bb64f] font-[1000]">
+        <div class="flex justify-center text-7xl text-green font-[1000]">
           <span class="-rotate-12">B</span>
           <span class="mt-1">I</span>
           <span class="rotate-12">B</span>
-          <span class="-rotate-6 text-[#7a6bcf]">D</span>
+          <span class="-rotate-6 text-crayola">D</span>
           <span class="mt-1">L</span>
           <span class="rotate-12">E</span>
         </div>

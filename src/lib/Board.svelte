@@ -66,7 +66,7 @@
     <div class="board-row">
       {#if isEmptyWord(word) && i === firstEmptyWordIndex()}
         {#each nextWord as letter}
-          <div class="bg-[#afadb0]">{letter || ''}</div>
+          <div class="bg-silverFoil dark:bg-darkLiver">{letter || ''}</div>
         {/each}
       {:else}
         {#each word as letter, j}
@@ -85,15 +85,15 @@
     @apply w-14 h-14 rounded-full text-3xl font-extrabold flex justify-center items-center;
   }
   .letter {
-    @apply bg-[#c3c3c9];
+    @apply bg-lavenderGray gdark:bg-onyx;
   }
   .letter:empty {
-    @apply bg-[#afadb0];
+    @apply bg-silverFoil gdark:bg-darkLiver;
   }
   .letter-belong {
-    @apply bg-[#978bd2];
+    @apply bg-lightCrayola gdark:bg-darkCrayola;
   }
   .letter-matched {
-    @apply bg-[#80bc51];
+    @apply bg-lightGreen gdark:bg-darkGreen;
   }
 </style>

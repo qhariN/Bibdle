@@ -46,12 +46,12 @@
 
 <style lang="postcss">
   button {
-    @apply rounded-full p-3 bg-[#c3c3c9]/40;
+    @apply rounded-full p-3 bg-lavenderGray/40 gdark:bg-onyx/40;
   }
   button:hover {
-    @apply bg-[#c3c3c9]/60;
+    @apply bg-lavenderGray/60 gdark:bg-onyx/60;
   }
   button:active {
-    @apply bg-[#c3c3c9]/80;
+    @apply bg-lavenderGray/80 gdark:bg-onyx/80;
   }
 </style>
