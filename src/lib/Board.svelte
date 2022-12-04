@@ -3,17 +3,15 @@
   import { onMount } from 'svelte'
   import { gameOver, words } from './store'
 
-  export let x = 5
-  export let y = 6
+  export let tries: number = 6
   export let randomWord: string
 
-  let nextWord: string[] = Array.from(Array(x))
+  let nextWord: string[] = Array.from(Array(randomWord.length))
 
   $: firstEmptyWordIndex = () => $words.findIndex(isEmptyWord)
 
   onMount(() => {
-    console.log(randomWord)
-    words.set(Array.from(Array(y), () => new Array(x)))
+    words.set(Array.from(Array(tries), () => new Array(randomWord.length)))
     document.addEventListener("keydown", pushKey)
   })
 
@@ -29,7 +27,7 @@
     const isEnter = key === "Enter"
 
     if (isBackspace) {
-      for (let i = x - 1; i >= 0; i--) {
+      for (let i = randomWord.length - 1; i >= 0; i--) {
         if (nextWord[i] !== undefined) {
           nextWord[i] = undefined
           break
@@ -37,7 +35,7 @@
       }
     }
     if (isEnter) {
-      if (nextWord.join('').length === x) {
+      if (nextWord.join('').length === randomWord.length) {
         const word = nextWord.map((letter, i) => ({
           name: letter,
           matched: letter === randomWord[i],
@@ -46,12 +44,12 @@
             : false
         }))
         $words[firstEmptyWordIndex()] = word
-        nextWord = Array.from(Array(x))
+        nextWord = Array.from(Array(randomWord.length))
         if (word.every(l => l.matched)) gameOver.set(true)
       }
     }
     if (isLetter) {
-      for (let i = 0; i < x; i++) {
+      for (let i = 0; i < randomWord.length; i++) {
         if (nextWord[i] === undefined) {
           nextWord[i] = key.toUpperCase()
           break

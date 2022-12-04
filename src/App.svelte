@@ -8,9 +8,11 @@
   import { gameOver } from './lib/store'
   import { onMount } from 'svelte'
 
-  let board
+  let word: BibleWord
+  let board: Board
 
   onMount(() => {
+    setRandomWord()
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark')
     } else {
@@ -22,10 +24,8 @@
     const randomIndex = Math.floor(Math.random() * bibleWords.length)
     const randomWord: BibleWord = bibleWords[randomIndex]
     randomWord.formattedName = randomWord.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-    return randomWord
+    word = randomWord
   }
-
-  let word: BibleWord = setRandomWord()
 </script>
 
 <div class="flex flex-col w-full h-screen dark:bg-raisinBlack dark:text-lightGray">
@@ -45,7 +45,9 @@
           <span class="rotate-12">E</span>
         </div>
       </div>
-      <Board bind:this={board} randomWord={word.formattedName} x={word.formattedName.length} />
+      {#if word}
+        <Board bind:this={board} randomWord={word.formattedName} />
+      {/if}
     </div>
   </main>
   <Keyboard on:pushKey={board.pushKey} />

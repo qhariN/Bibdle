@@ -1,9 +1,13 @@
-<script>
+<script lang="ts">
   import diceSvg from '../assets/dice.svg'
   import eyeSvg from '../assets/eye.svg'
   import darkModeSvg from '../assets/dark-mode.svg'
   import helpSvg from '../assets/help.svg'
   import settingsSvg from '../assets/settings.svg'
+  import { createEventDispatcher } from 'svelte'
+
+  const dispatch = createEventDispatcher()
+  const randomWord = () => dispatch('randomWord')
 
   let darkMode = document.documentElement.classList.contains('dark')
 
@@ -24,7 +28,7 @@
 
 <header class="flex px-12 py-6">
   <div class="flex gap-3">
-    <button type="button">
+    <button on:click={randomWord} type="button">
       <img src={diceSvg} width="24" height="24" alt="dice" title="Palabra aleatoria">
     </button>
     <button type="button">

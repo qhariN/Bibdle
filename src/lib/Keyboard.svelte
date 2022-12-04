@@ -3,6 +3,9 @@
   import backspaceSvg from '../assets/backspace.svg'
   import { createEventDispatcher } from 'svelte';
 
+  const dispatch = createEventDispatcher()
+  const pushKey = (key: string) => dispatch('pushKey', key)
+  
   const keys: string[][] = [
     ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
     ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ñ'],
@@ -11,9 +14,6 @@
 
   $: usedKeys = new Set($words.flat().map(({ name }) => name))
   $: isUsedKey = (key: string) => usedKeys.has(key)
-
-  const dispatch = createEventDispatcher()
-  const pushKey = (key: string) => dispatch('pushKey', key)
 </script>
 
 <footer>
