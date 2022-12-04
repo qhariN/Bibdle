@@ -13,11 +13,6 @@
 
   onMount(() => {
     setRandomWord()
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
   })
 
   const setRandomWord = () => {
@@ -29,7 +24,7 @@
 </script>
 
 <div class="flex flex-col w-full h-screen dark:bg-raisinBlack dark:text-lightGray">
-  <Menu />
+  <Menu on:randomWord={setRandomWord} />
   <main class="grow flex justify-center items-center">
     <div class="w-full max-w-screen-md flex flex-col items-center gap-8">
       <div class="flex flex-col items-center">

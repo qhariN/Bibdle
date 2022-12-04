@@ -7,9 +7,22 @@
   import { createEventDispatcher } from 'svelte'
 
   const dispatch = createEventDispatcher()
-  const randomWord = () => dispatch('randomWord')
+  const randomWord = (e: MouseEvent) => {
+    dispatch('randomWord')
+    if (e.target instanceof HTMLButtonElement) {
+      e.target.blur()
+    }
+  }
 
-  let darkMode = document.documentElement.classList.contains('dark')
+  let darkMode: boolean = (() => {
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark')
+      return true
+    } else {
+      document.documentElement.classList.remove('dark')
+      return false
+    }
+  })()
 
   $: {
     if (darkMode) {

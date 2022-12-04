@@ -6,12 +6,16 @@
   export let tries: number = 6
   export let randomWord: string
 
-  let nextWord: string[] = Array.from(Array(randomWord.length))
+  let nextWord: string[]
 
   $: firstEmptyWordIndex = () => $words.findIndex(isEmptyWord)
+  $: {
+    words.set(Array.from(Array(tries), () => new Array(randomWord.length)))
+    nextWord = Array.from(Array(randomWord.length))
+    gameOver.set(false)
+  }
 
   onMount(() => {
-    words.set(Array.from(Array(tries), () => new Array(randomWord.length)))
     document.addEventListener("keydown", pushKey)
   })
 
