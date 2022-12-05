@@ -10,9 +10,14 @@
     scroll-behavior: smooth;
     color: #413d43;
   }
+  body {
+    overflow: hidden;
+    background-color: #e4e4e4;
+  }
 }
 
-body {
-  overflow: hidden;
-  background-color: #e4e4e4;
+@layer utilities {
+  .filter-silverFoil {
+    filter: invert(87%) sepia(13%) saturate(6%) hue-rotate(275deg) brightness(97%) contrast(92%);
+  }
 }

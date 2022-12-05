@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { words } from './store'
   import backspaceSvg from '../assets/backspace.svg'
   import { createEventDispatcher } from 'svelte';
+  import { words } from './store'
 
   const dispatch = createEventDispatcher()
   const pushKey = (key: string) => dispatch('pushKey', key)
@@ -22,7 +22,7 @@
       {#each row as key}
         <button on:click={() => pushKey(key)} class:enter={key === 'Enter'} class:key-used={isUsedKey(key)} type="button">
           {#if key === 'Backspace'}
-            <img src={backspaceSvg} width="20" height="20" alt="backspace" class="mb-[2px] mr-[4px]">
+            <img src={backspaceSvg} width="20" height="20" alt="backspace" class="mb-[2px] mr-[4px] dark:filter-silverFoil">
           {:else}
             {key}
           {/if}
@@ -46,6 +46,6 @@
     @apply text-sm text-center w-20;
   }
   .key-used {
-    color: #308519;
+    @apply text-darkGreen gdark:text-darkGreen;
   }
 </style>

@@ -19,10 +19,6 @@
     document.addEventListener("keydown", pushKey)
   })
 
-  const isEmptyWord = (letters: Letter[]):boolean => {
-    return typeof letters[0] === "undefined"
-  }
-
   export const pushKey = (event: KeyboardEvent | CustomEvent) => {
     if ($gameOver) return
     const key = (event as KeyboardEvent).key || (event as CustomEvent).detail
@@ -60,6 +56,10 @@
         }
       }
     }
+  }
+
+  const isEmptyWord = (letters: Letter[]): boolean => {
+    return typeof letters[0] === "undefined"
   }
 </script>
 

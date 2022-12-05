@@ -4,9 +4,9 @@
   import Board from './lib/Board.svelte'
   import Keyboard from './lib/Keyboard.svelte'
   import bibleWords from './assets/bible-words.json'
+  import { onMount } from 'svelte'
   import { confetti } from '@neoconfetti/svelte'
   import { gameOver } from './lib/store'
-  import { onMount } from 'svelte'
 
   let word: BibleWord
   let board: Board
@@ -18,7 +18,7 @@
   const setRandomWord = () => {
     const randomIndex = Math.floor(Math.random() * bibleWords.length)
     const randomWord: BibleWord = bibleWords[randomIndex]
-    randomWord.formattedName = randomWord.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    randomWord.formattedName = randomWord.name.normalize("NFD").replace(/[\u0300-\u036f]/g, '')
     word = randomWord
   }
 </script>

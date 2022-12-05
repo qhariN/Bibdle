@@ -41,21 +41,21 @@
 
 <header class="flex px-12 py-6">
   <div class="flex gap-3">
-    <button on:click={randomWord} type="button">
+    <button on:click={randomWord} type="button" class="dark:filter-silverFoil">
       <img src={diceSvg} width="24" height="24" alt="dice" title="Palabra aleatoria">
     </button>
-    <button type="button">
+    <button type="button" class="dark:filter-silverFoil">
       <img src={eyeSvg} width="24" height="24" alt="eye open" title="Mostrar palabra">
     </button>
   </div>
   <div class="flex gap-3 ml-auto">
-    <button on:click={toggleDarkMode} type="button">
+    <button on:click={toggleDarkMode} type="button" class="dark:filter-silverFoil">
       <img src={darkModeSvg} width="24" height="24" alt="moon" title="Modo oscuro">
     </button>
-    <button type="button">
+    <button type="button" class="dark:filter-silverFoil">
       <img src={helpSvg} width="24" height="24" alt="question mark" title="Ayuda">
     </button>
-    <button type="button">
+    <button type="button" class="dark:filter-silverFoil">
       <img src={settingsSvg} width="24" height="24" alt="gear" title="Ajustes">
     </button>
   </div>
