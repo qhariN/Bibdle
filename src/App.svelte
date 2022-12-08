@@ -23,15 +23,15 @@
   }
 </script>
 
-<div class="flex flex-col w-full h-screen dark:bg-raisinBlack dark:text-lightGray">
+<div class="flex flex-col w-full min-h-screen dark:bg-raisinBlack dark:text-lightGray">
   <Menu on:randomWord={setRandomWord} />
   <main class="grow flex justify-center items-center">
-    <div class="w-full max-w-screen-md flex flex-col items-center gap-8">
+    <div class="w-full max-w-screen-md flex flex-col items-center gap-3 sm:gap-8 px-4">
       <div class="flex flex-col items-center">
         {#if $gameOver}
           <div use:confetti={{ colors: ['#7bb64f', '#7a6bcf', '#80bc51', '#978bd2', '#afadb0'] }} />
         {/if}
-        <div class="flex justify-center text-7xl text-green font-[1000]">
+        <div class="flex justify-center text-6xl sm:text-7xl text-green font-[1000]">
           <span class="-rotate-12">B</span>
           <span class="mt-1">I</span>
           <span class="rotate-12">B</span>

@@ -79,7 +79,7 @@
   }
 </script>
 
-<div class="space-y-2">
+<div class="max-w-full overflow-x-auto space-y-2 pb-6 sm:pb-8">
   {#each $words as word, i}
     <div class="board-row">
       {#if isEmptyWord(word) && i === firstEmptyWordIndex()}
@@ -100,7 +100,7 @@
     @apply flex gap-2;
   }
   .board-row > div {
-    @apply w-14 h-14 rounded-full text-3xl font-extrabold flex justify-center items-center;
+    @apply min-w-[3.5rem] h-14 rounded-full text-3xl font-extrabold flex justify-center items-center;
   }
   .letter {
     @apply bg-lavenderGray gdark:bg-onyx;

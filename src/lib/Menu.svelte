@@ -39,8 +39,8 @@
   }
 </script>
 
-<header class="flex px-12 py-6">
-  <div class="flex gap-3">
+<header class="flex px-6 py-4 sm:px-12 sm:py-6">
+  <div class="flex gap-2 sm:gap-3">
     <button on:click={randomWord} type="button" class="dark:filter-silverFoil">
       <img src={diceSvg} width="24" height="24" alt="dice" title="Palabra aleatoria">
     </button>
@@ -48,7 +48,7 @@
       <img src={eyeSvg} width="24" height="24" alt="eye open" title="Mostrar palabra">
     </button>
   </div>
-  <div class="flex gap-3 ml-auto">
+  <div class="flex gap-2 sm:gap-3 ml-auto">
     <button on:click={toggleDarkMode} type="button" class="dark:filter-silverFoil">
       <img src={darkModeSvg} width="24" height="24" alt="moon" title="Modo oscuro">
     </button>

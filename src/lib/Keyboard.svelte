@@ -34,7 +34,7 @@
 
 <style lang="postcss">
   footer {
-    @apply bg-lavenderGray gdark:bg-onyx p-7;
+    @apply bg-lavenderGray gdark:bg-onyx px-4 py-3 sm:p-7;
   }
   button {
     @apply w-10 h-10 font-extrabold uppercase gdark:text-silverFoil;
