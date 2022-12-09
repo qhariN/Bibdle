@@ -7,6 +7,7 @@
   import { onMount } from 'svelte'
   import { confetti } from '@neoconfetti/svelte'
   import { gameOver } from './lib/store'
+  import { parseWord } from './utils/utils'
 
   let word: BibleWord
   let board: Board
@@ -18,15 +19,15 @@
   const setRandomWord = () => {
     const randomIndex = Math.floor(Math.random() * bibleWords.length)
     const randomWord: BibleWord = bibleWords[randomIndex]
-    randomWord.formattedName = randomWord.name.normalize("NFD").replace(/[\u0300-\u036f]/g, '')
+    randomWord.formattedName = parseWord(randomWord.name)
     word = randomWord
   }
 </script>
 
-<div class="flex flex-col w-full min-h-screen dark:bg-raisinBlack dark:text-lightGray">
+<div class="flex flex-col w-full min-h-screen overflow-hidden dark:bg-raisinBlack dark:text-lightGray">
   <Menu on:randomWord={setRandomWord} />
   <main class="grow flex justify-center items-center">
-    <div class="w-full max-w-screen-md flex flex-col items-center gap-3 sm:gap-8 px-4">
+    <div class="w-full flex flex-col items-center gap-3 sm:gap-8 px-4">
       <div class="flex flex-col items-center">
         {#if $gameOver}
           <div use:confetti={{ colors: ['#7bb64f', '#7a6bcf', '#80bc51', '#978bd2', '#afadb0'] }} />

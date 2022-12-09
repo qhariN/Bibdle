@@ -5,6 +5,7 @@
   import spanishWords from '../assets/spanish-words.json'
   import { onMount } from 'svelte'
   import { gameOver, words } from './store'
+  import { parseWord } from '../utils/utils'
 
   export let tries: number = 6
   export let randomWord: string
@@ -18,6 +19,7 @@
     nextWord = Array.from(Array(randomWord.length))
     gameOver.set(false)
   }
+  $: if (firstEmptyWordIndex() === -1) alert(randomWord)
 
   onMount(() => {
     document.addEventListener("keydown", pushKey)
@@ -73,7 +75,7 @@
   const verifyMatch = (words: string[] | BibleWord[], word: string): boolean => {
     return words.some((w: string | BibleWord) => {
       w = typeof w === "string" ? w : w.name
-      w = w.normalize("NFD").replace(/[\u0300-\u036f]/g, '')
+      w = parseWord(w)
       return w.toLowerCase() === word.toLowerCase()
     })
   }
