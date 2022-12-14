@@ -1,8 +1,9 @@
 <script lang="ts">
   import type { Letter } from 'src/interfaces/letter'
-  import type { BibleWord } from 'src/interfaces/bible-word';
+  import type { BibleWord } from 'src/interfaces/bible-word'
   import bibleWords from '../assets/bible-words.json'
   import spanishWords from '../assets/spanish-words.json'
+  import Tile from './Tile.svelte'
   import { onMount } from 'svelte'
   import { gameOver, words } from './store'
   import { parseWord } from '../utils/utils'
@@ -44,7 +45,7 @@
       const nextWordString = nextWord.join('')
       if (nextWordString.length === randomWord.length && (verifyMatch(bibleWords, nextWordString) || verifyMatch(spanishWords, nextWordString))) {
         const word = nextWord.map((letter, i) => ({
-          name: letter,
+          key: letter,
           matched: letter === randomWord[i],
           belong: nextWord.filter((l, i) => l === randomWord[i] && l === letter).length < randomWord.split('').filter(l => l === letter).length
             ? randomWord.includes(letter)
@@ -83,47 +84,16 @@
 
 <div class="max-w-full overflow-x-auto space-y-2 pb-6 sm:pb-8">
   {#each $words as word, i}
-    <div class="board-row">
+    <div class="flex gap-2">
       {#if isEmptyWord(word) && i === firstEmptyWordIndex()}
-        {#each nextWord as letter}
-          <div class="bg-silverFoil dark:bg-darkLiver" class:shake={shakeLetters}>{letter || ''}</div>
+        {#each nextWord as key}
+          <Tile {key} shake={shakeLetters} isNextWord />
         {/each}
       {:else}
-        {#each word as letter, j}
-          <div class="letter" class:letter-belong={letter?.belong} class:letter-matched={letter?.matched}>{letter?.name || ''}</div>
+        {#each word as letter}
+          <Tile {...letter} />
         {/each}
       {/if}
     </div>
   {/each}
 </div>
-
-<style lang="postcss">
-  .board-row {
-    @apply flex gap-2;
-  }
-  .board-row > div {
-    @apply min-w-[3.5rem] h-14 rounded-full text-3xl font-extrabold flex justify-center items-center;
-  }
-  .letter {
-    @apply bg-lavenderGray gdark:bg-onyx;
-  }
-  .letter:empty {
-    @apply bg-silverFoil gdark:bg-darkLiver;
-  }
-  .letter-belong {
-    @apply bg-lightCrayola gdark:bg-darkCrayola;
-  }
-  .letter-matched {
-    @apply bg-lightGreen gdark:bg-darkGreen;
-  }
-  .shake {
-    animation: shake .8s;
-    animation-iteration-count: infinite;
-  }
-  @keyframes shake {
-    10%, 90% { transform: translate3d(-1px, 0, 0); }
-    20%, 80% { transform: translate3d(2px, 0, 0); }
-    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-    40%, 60% { transform: translate3d(4px, 0, 0); }
-  }
-</style>

@@ -12,7 +12,7 @@
     ['Enter', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Backspace'],
   ]
 
-  $: usedKeys = new Set($words.flat().map(({ name }) => name))
+  $: usedKeys = new Set($words.flat().map(({ key }) => key))
   $: isUsedKey = (key: string) => usedKeys.has(key)
 </script>
 

@@ -1,5 +1,5 @@
 export interface Letter {
-  name: string;
-  matched: boolean;
-  belong: boolean;
+  key:     string
+  matched: boolean
+  belong:  boolean
 }
