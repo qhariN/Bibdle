@@ -1,10 +1,13 @@
 <script lang="ts">
   import diceSvg from '../assets/dice.svg'
+  import homeSvg from '../assets/home.svg'
   import eyeSvg from '../assets/eye.svg'
   import darkModeSvg from '../assets/dark-mode.svg'
   import helpSvg from '../assets/help.svg'
   import settingsSvg from '../assets/settings.svg'
   import { createEventDispatcher } from 'svelte'
+
+  export let view: 'board' | 'word' | 'help'
 
   const dispatch = createEventDispatcher()
   const randomWord = (e: MouseEvent) => {
@@ -41,9 +44,15 @@
 
 <header class="flex px-6 py-4 sm:px-12 sm:py-6">
   <div class="flex gap-2 sm:gap-3">
-    <button on:click={randomWord} type="button" class="dark:filter-silverFoil">
-      <img src={diceSvg} width="24" height="24" alt="dice" title="Palabra aleatoria">
-    </button>
+    {#if view === 'board'}
+      <button on:click={randomWord} type="button" class="dark:filter-silverFoil">
+        <img src={diceSvg} width="24" height="24" alt="dice" title="Palabra aleatoria">
+      </button>
+    {:else}
+      <button on:click={() => view = 'board'} type="button" class="dark:filter-silverFoil">
+        <img src={homeSvg} width="24" height="24" alt="home" title="Volver al inicio">
+      </button>
+    {/if}
     <!-- <button type="button" class="dark:filter-silverFoil">
       <img src={eyeSvg} width="24" height="24" alt="eye open" title="Mostrar palabra">
     </button> -->
@@ -52,9 +61,9 @@
     <button on:click={toggleDarkMode} type="button" class="dark:filter-silverFoil">
       <img src={darkModeSvg} width="24" height="24" alt="moon" title="Modo oscuro">
     </button>
-    <!-- <button type="button" class="dark:filter-silverFoil">
+    <button on:click={() => view = 'help'} type="button" class="dark:filter-silverFoil">
       <img src={helpSvg} width="24" height="24" alt="question mark" title="Ayuda">
-    </button> -->
+    </button>
     <!-- <button type="button" class="dark:filter-silverFoil">
       <img src={settingsSvg} width="24" height="24" alt="gear" title="Ajustes">
     </button> -->
