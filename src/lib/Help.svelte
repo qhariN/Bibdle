@@ -59,7 +59,7 @@
     <div class="space-y-3">
       <h2>Letras repetidas</h2>
       <p>La palabra oculta puede tener letras repetidas. En ese caso, las pistas son independientes para cada letra y tienen prioridad (verde es mayor a purpura).</p>
-      <p>Por ejemplo si la palabra oculta es ROSAS y utilizamos SACOS entonces se marca la primera S en en purpura y la segunda S en verde.</p>
+      <p>Por ejemplo si la palabra oculta es ROSAS y utilizamos SACOS entonces se marca la primera S en purpura y la segunda S en verde.</p>
       <div class="flex justify-center gap-2">
         <Tile key="S" belong />
         <Tile key="A" />
