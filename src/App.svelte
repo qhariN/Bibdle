@@ -1,8 +1,9 @@
 <script lang="ts">
   import type { BibleWord } from './interfaces/bible-word'
   import Menu from './lib/Menu.svelte'
+  import Result from './lib/Result.svelte'
   import Help from './lib/Help.svelte'
-  import Bibdle from './lib/Bibdle.svelte';
+  import Bibdle from './lib/Bibdle.svelte'
   import Board from './lib/Board.svelte'
   import Keyboard from './lib/Keyboard.svelte'
   import bibleWords from './assets/bible-words.json'
@@ -11,7 +12,7 @@
 
   let word: BibleWord
   let board: Board
-  let view: 'board' | 'word' | 'help' = 'board'
+  let view: 'board' | 'result' | 'help' = 'board'
 
   onMount(() => {
     setRandomWord()
@@ -28,15 +29,15 @@
 <div class="flex flex-col w-full min-h-screen overflow-hidden dark:bg-raisinBlack dark:text-lightGray">
   <Menu bind:view on:randomWord={setRandomWord} />
   {#if view === 'board'}
-    <main class="grow flex justify-center items-center">
-      <div class="w-full flex flex-col items-center gap-3 sm:gap-8 px-4">
-        <Bibdle />
-        {#if word}
-          <Board bind:this={board} randomWord={word.formattedName} />
-        {/if}
-      </div>
+    <main class="grow self-center flex flex-col justify-center items-center gap-3 sm:gap-8 max-w-full px-4">
+      <Bibdle />
+      {#if word}
+        <Board bind:this={board} randomWord={word.formattedName} />
+      {/if}
     </main>
     <Keyboard on:pushKey={board.pushKey} />
+  {:else if view === 'result'}
+    <Result {word} />
   {:else if view === 'help'}
     <Help />
   {/if}

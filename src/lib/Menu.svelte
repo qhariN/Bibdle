@@ -7,7 +7,7 @@
   import settingsSvg from '../assets/settings.svg'
   import { createEventDispatcher } from 'svelte'
 
-  export let view: 'board' | 'word' | 'help'
+  export let view: 'board' | 'result' | 'help'
 
   const dispatch = createEventDispatcher()
   const randomWord = (e: MouseEvent) => {
@@ -45,39 +45,27 @@
 <header class="flex px-6 py-4 sm:px-12 sm:py-6">
   <div class="flex gap-2 sm:gap-3">
     {#if view === 'board'}
-      <button on:click={randomWord} type="button" class="dark:filter-silverFoil">
+      <button on:click={randomWord} type="button" class="btn">
         <img src={diceSvg} width="24" height="24" alt="dice" title="Palabra aleatoria">
       </button>
     {:else}
-      <button on:click={() => view = 'board'} type="button" class="dark:filter-silverFoil">
+      <button on:click={() => view = 'board'} type="button" class="btn">
         <img src={homeSvg} width="24" height="24" alt="home" title="Volver al inicio">
       </button>
     {/if}
-    <!-- <button type="button" class="dark:filter-silverFoil">
+    <button on:click={() => view = 'result'} type="button" class="btn">
       <img src={eyeSvg} width="24" height="24" alt="eye open" title="Mostrar palabra">
-    </button> -->
+    </button>
   </div>
   <div class="flex gap-2 sm:gap-3 ml-auto">
-    <button on:click={toggleDarkMode} type="button" class="dark:filter-silverFoil">
+    <button on:click={toggleDarkMode} type="button" class="btn">
       <img src={darkModeSvg} width="24" height="24" alt="moon" title="Modo oscuro">
     </button>
-    <button on:click={() => view = 'help'} type="button" class="dark:filter-silverFoil">
+    <button on:click={() => view = 'help'} type="button" class="btn">
       <img src={helpSvg} width="24" height="24" alt="question mark" title="Ayuda">
     </button>
-    <!-- <button type="button" class="dark:filter-silverFoil">
+    <!-- <button type="button" class="btn">
       <img src={settingsSvg} width="24" height="24" alt="gear" title="Ajustes">
     </button> -->
   </div>
 </header>
-
-<style lang="postcss">
-  button {
-    @apply rounded-full p-3 bg-lavenderGray/40 gdark:bg-onyx/40;
-  }
-  button:hover {
-    @apply bg-lavenderGray/60 gdark:bg-onyx/60;
-  }
-  button:active {
-    @apply bg-lavenderGray/80 gdark:bg-onyx/80;
-  }
-</style>
