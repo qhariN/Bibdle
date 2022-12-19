@@ -6,7 +6,7 @@
 <main class="grow self-center flex flex-col items-center gap-7 max-w-full w-[32rem] px-4">
   <Bibdle />
   <div class="space-y-3">
-    <h2>Como jugar</h2>
+    <h2>Cómo jugar</h2>
     <p>Las reglas son simples: adivina la palabra oculta en 6 intentos. Cada intento debe ser una palabra válida y si la palabra no existe el juego te avisará.</p>
     <p>Después de cada intento el color de las casillas cambia para mostrar qué tan cerca estás de acertar la palabra.</p>
     <div class="space-y-2 sm:mx-4">

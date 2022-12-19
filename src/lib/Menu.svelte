@@ -5,9 +5,8 @@
   import darkModeSvg from '../assets/dark-mode.svg'
   import helpSvg from '../assets/help.svg'
   import settingsSvg from '../assets/settings.svg'
+  import { view } from './store'
   import { createEventDispatcher } from 'svelte'
-
-  export let view: 'board' | 'result' | 'help'
 
   const dispatch = createEventDispatcher()
   const randomWord = (e: MouseEvent) => {
@@ -44,16 +43,16 @@
 
 <header class="flex px-6 py-4 sm:px-12 sm:py-6">
   <div class="flex gap-2 sm:gap-3">
-    {#if view === 'board'}
+    {#if $view === 'board'}
       <button on:click={randomWord} type="button" class="btn">
         <img src={diceSvg} width="24" height="24" alt="dice" title="Palabra aleatoria">
       </button>
     {:else}
-      <button on:click={() => view = 'board'} type="button" class="btn">
+      <button on:click={() => view.set('board')} type="button" class="btn">
         <img src={homeSvg} width="24" height="24" alt="home" title="Volver al inicio">
       </button>
     {/if}
-    <button on:click={() => view = 'result'} type="button" class="btn">
+    <button on:click={() => view.set('result')} type="button" class="btn">
       <img src={eyeSvg} width="24" height="24" alt="eye open" title="Mostrar palabra">
     </button>
   </div>
@@ -61,7 +60,7 @@
     <button on:click={toggleDarkMode} type="button" class="btn">
       <img src={darkModeSvg} width="24" height="24" alt="moon" title="Modo oscuro">
     </button>
-    <button on:click={() => view = 'help'} type="button" class="btn">
+    <button on:click={() => view.set('help')} type="button" class="btn">
       <img src={helpSvg} width="24" height="24" alt="question mark" title="Ayuda">
     </button>
     <!-- <button type="button" class="btn">

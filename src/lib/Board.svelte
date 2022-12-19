@@ -5,7 +5,7 @@
   import spanishWords from '../assets/spanish-words.json'
   import Tile from './Tile.svelte'
   import { onMount } from 'svelte'
-  import { gameOver, words } from './store'
+  import { gameOver, view, words } from './store'
   import { parseWord } from '../utils/utils'
 
   export let tries: number = 6
@@ -20,7 +20,6 @@
     nextWord = Array.from(Array(randomWord.length))
     gameOver.set(false)
   }
-  $: if (firstEmptyWordIndex() === -1) alert(randomWord)
 
   onMount(() => {
     document.addEventListener("keydown", pushKey)
@@ -54,6 +53,7 @@
         $words[firstEmptyWordIndex()] = word
         nextWord = Array.from(Array(randomWord.length))
         if (word.every(l => l.matched)) gameOver.set(true)
+        if ($gameOver || firstEmptyWordIndex() === -1) view.set('result')
       } else {
         shakeLetters = true
         setTimeout(() => shakeLetters = false, 400)

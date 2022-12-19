@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let key: string
+  export let key: string = ''
   export let belong: boolean = false
   export let matched: boolean = false
   export let shake: boolean = false
