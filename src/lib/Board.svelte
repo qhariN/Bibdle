@@ -4,25 +4,23 @@
   import bibleWords from '../assets/bible-words.json'
   import spanishWords from '../assets/spanish-words.json'
   import Tile from './Tile.svelte'
-  import { onMount } from 'svelte'
+  import { onDestroy, onMount } from 'svelte'
   import { gameOver, view, words } from './store'
   import { parseWord } from '../utils/utils'
 
-  export let tries: number = 6
   export let randomWord: string
 
-  let nextWord: string[]
   let shakeLetters: boolean = false
 
+  $: nextWord = Array.from(Array(randomWord.length))
   $: firstEmptyWordIndex = () => $words.findIndex(isEmptyWord)
-  $: {
-    words.set(Array.from(Array(tries), () => new Array(randomWord.length)))
-    nextWord = Array.from(Array(randomWord.length))
-    gameOver.set(false)
-  }
 
   onMount(() => {
     document.addEventListener("keydown", pushKey)
+  })
+
+  onDestroy(() => {
+    document.removeEventListener("keydown", pushKey)
   })
 
   export const pushKey = (event: KeyboardEvent | CustomEvent) => {

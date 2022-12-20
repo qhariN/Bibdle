@@ -44,7 +44,7 @@
 
 <main class="grow self-center flex flex-col items-center gap-7 max-w-full w-[32rem] px-4">
   <div class="grow flex flex-col justify-center items-center gap-7 max-w-full">
-    <Bibdle />
+    <Bibdle withConfetti />
     <h2>Respuesta</h2>
     <div class="space-y-3 max-w-full lg:max-w-none">
       <h3>La palabra es</h3>

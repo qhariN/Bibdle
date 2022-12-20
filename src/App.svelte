@@ -9,9 +9,10 @@
   import bibleWords from './assets/bible-words.json'
   import { onMount } from 'svelte'
   import { parseWord } from './utils/utils'
-  import { gameOver, view } from './lib/store'
+  import { gameOver, view, words } from './lib/store'
 
   let word: BibleWord
+  let tries: number = 6
   let board: Board
 
   onMount(() => {
@@ -23,6 +24,7 @@
     const randomWord: BibleWord = bibleWords[randomIndex]
     randomWord.formattedName = parseWord(randomWord.name)
     word = randomWord
+    words.set(Array.from(Array(tries), () => new Array(word.formattedName.length)))
     gameOver.set(false)
   }
 </script>
