@@ -6,7 +6,7 @@
   import facebookSvg from '../assets/facebook.svg'
   import whatsappSvg from '../assets/whatsapp.svg'
   import twitterSvg from '../assets/twitter.svg'
-  import { gameOver } from '../lib/store'
+  import { gameOver, gameWon } from '../lib/store'
 
   export let word: BibleWord
 
@@ -49,7 +49,7 @@
   <div class="grow flex flex-col justify-center items-center gap-7 max-w-full">
     <Bibdle withConfetti />
     <h2>Respuesta</h2>
-    {#if !isSecret || $gameOver}
+    {#if !isSecret || $gameOver || $gameWon}
       <div class="space-y-3 max-w-full lg:max-w-none">
         <h3>La palabra es</h3>
         <div class="flex gap-2 max-w-full overflow-x-auto">
@@ -68,7 +68,7 @@
       <div class="flex flex-col items-center">
         <p>Aún no has terminado de jugar</p>
         <p>¿Quieres revelar la palabra?</p>
-        <button on:click={() => isSecret = false} class="rounded-full px-5 py-3 bg-lightGreen hover:bg-green dark:bg-darkGreen font-black mt-3">REVELAR</button>
+        <button on:click={() => isSecret = false} class="rounded-full px-5 py-3 bg-lightGreen hover:bg-green dark:bg-darkGreen dark:hover:bg-darkGreen/90 font-black mt-3">REVELAR</button>
       </div>
     {/if}
     <div class="space-y-3">

@@ -5,7 +5,7 @@
   import spanishWords from '../assets/spanish-words.json'
   import Tile from './Tile.svelte'
   import { onDestroy, onMount } from 'svelte'
-  import { gameOver, view, words } from './store'
+  import { gameOver, gameWon, view, words } from './store'
   import { parseWord } from '../utils/utils'
 
   export let randomWord: string
@@ -24,7 +24,7 @@
   })
 
   export const pushKey = (event: KeyboardEvent | CustomEvent) => {
-    if ($gameOver) return
+    if ($gameOver || $gameWon) return
     const key = (event as KeyboardEvent).key || (event as CustomEvent).detail
     const isLetter = key.length === 1 && key.match(/[ña-z]/i)
     const isBackspace = key === "Backspace"
@@ -50,7 +50,7 @@
         }))
         $words[firstEmptyWordIndex()] = word
         nextWord = Array.from(Array(randomWord.length))
-        if ($gameOver || firstEmptyWordIndex() === -1) view.set('result')
+        if ($gameOver || $gameWon) view.set('result')
       } else {
         shakeLetters = true
         setTimeout(() => shakeLetters = false, 400)
@@ -66,9 +66,7 @@
     }
   }
 
-  const isEmptyWord = (letters: Letter[]): boolean => {
-    return typeof letters[0] === 'undefined'
-  }
+  const isEmptyWord = (letters: Letter[]): boolean => !letters[0]
 
   const verifyMatch = (words: string[] | BibleWord[], word: string): boolean => {
     return words.some((w: string | BibleWord) => {
