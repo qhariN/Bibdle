@@ -50,7 +50,6 @@
         }))
         $words[firstEmptyWordIndex()] = word
         nextWord = Array.from(Array(randomWord.length))
-        if (word.every(l => l.matched)) gameOver.set(true)
         if ($gameOver || firstEmptyWordIndex() === -1) view.set('result')
       } else {
         shakeLetters = true
@@ -68,7 +67,7 @@
   }
 
   const isEmptyWord = (letters: Letter[]): boolean => {
-    return typeof letters[0] === "undefined"
+    return typeof letters[0] === 'undefined'
   }
 
   const verifyMatch = (words: string[] | BibleWord[], word: string): boolean => {
