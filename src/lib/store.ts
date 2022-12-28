@@ -1,7 +1,7 @@
 import type { Letter } from 'src/interfaces/letter'
 import { derived, writable, type Readable, type Writable } from 'svelte/store'
 
-export const view: Writable<'board' | 'result' | 'help'> = writable('board')
+export const view: Writable<'welcome' | 'board' | 'result' | 'help'> = writable('board')
 
 export const words: Writable<Letter[][] | undefined[][]> = writable([])
 

@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { BibleWord } from './interfaces/bible-word'
   import Menu from './lib/Menu.svelte'
+  import Welcome from './lib/Welcome.svelte'
   import Result from './lib/Result.svelte'
   import Help from './lib/Help.svelte'
   import Bibdle from './lib/Bibdle.svelte'
@@ -17,6 +18,10 @@
 
   onMount(() => {
     setRandomWord()
+    if (!localStorage.getItem('dirtyVisit')) {
+      view.set('welcome')
+      localStorage.setItem('dirtyVisit', 'true');
+    }
   })
 
   const setRandomWord = () => {
@@ -38,6 +43,8 @@
       {/if}
     </main>
     <Keyboard on:pushKey={board.pushKey} />
+  {:else if $view === 'welcome'}
+    <Welcome />
   {:else if $view === 'result'}
     <Result {word} />
   {:else if $view === 'help'}
