@@ -39,7 +39,7 @@
     <main class="grow self-center flex flex-col justify-center items-center gap-3 sm:gap-8 max-w-full px-4">
       <Bibdle />
       {#if word}
-        <Board bind:this={board} randomWord={word.formattedName} />
+        <Board bind:this={board} {word} />
       {/if}
     </main>
     <Keyboard on:pushKey={board.pushKey} />

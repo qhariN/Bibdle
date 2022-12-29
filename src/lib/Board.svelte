@@ -8,11 +8,11 @@
   import { gameOver, gameWon, view, words } from './store'
   import { parseWord } from '../utils/utils'
 
-  export let randomWord: string
+  export let word: BibleWord
 
   let shakeLetters: boolean = false
 
-  $: nextWord = Array.from(Array(randomWord.length))
+  $: nextWord = Array.from(Array(word.name.length))
   $: firstEmptyWordIndex = () => $words.findIndex(isEmptyWord)
 
   onMount(() => {
@@ -31,7 +31,7 @@
     const isEnter = key === "Enter"
 
     if (isBackspace) {
-      for (let i = randomWord.length - 1; i >= 0; i--) {
+      for (let i = word.name.length - 1; i >= 0; i--) {
         if (nextWord[i] !== undefined) {
           nextWord[i] = undefined
           break
@@ -40,16 +40,15 @@
     }
     if (isEnter) {
       const nextWordString = nextWord.join('')
-      if (nextWordString.length === randomWord.length && (verifyMatch(bibleWords, nextWordString) || verifyMatch(spanishWords, nextWordString))) {
-        const word = nextWord.map((letter, i) => ({
+      if (nextWordString.length === word.name.length && (verifyMatch(bibleWords, nextWordString) || verifyMatch(spanishWords, nextWordString))) {
+        $words[firstEmptyWordIndex()] = nextWord.map((letter, i) => ({
           key: letter,
-          matched: letter === randomWord[i],
-          belong: nextWord.filter((l, i) => l === randomWord[i] && l === letter).length < randomWord.split('').filter(l => l === letter).length
-            ? randomWord.includes(letter)
+          matched: letter === word.formattedName[i],
+          belong: nextWord.filter((l, i) => l === word.formattedName[i] && l === letter).length < word.formattedName.split('').filter(l => l === letter).length
+            ? word.formattedName.includes(letter)
             : false
         }))
-        $words[firstEmptyWordIndex()] = word
-        nextWord = Array.from(Array(randomWord.length))
+        nextWord = Array.from(Array(word.name.length))
         if ($gameOver || $gameWon) view.set('result')
       } else {
         shakeLetters = true
@@ -57,7 +56,7 @@
       }
     }
     if (isLetter) {
-      for (let i = 0; i < randomWord.length; i++) {
+      for (let i = 0; i < word.name.length; i++) {
         if (nextWord[i] === undefined) {
           nextWord[i] = key.toUpperCase()
           break
