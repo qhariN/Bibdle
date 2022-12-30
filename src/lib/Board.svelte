@@ -42,7 +42,7 @@
       const nextWordString = nextWord.join('')
       if (nextWordString.length === word.name.length && (verifyMatch(bibleWords, nextWordString) || verifyMatch(spanishWords, nextWordString))) {
         $words[firstEmptyWordIndex()] = nextWord.map((letter, i) => ({
-          key: letter,
+          key: letter === word.formattedName[i]? word.name[i] : letter,
           matched: letter === word.formattedName[i],
           belong: nextWord.filter((l, i) => l === word.formattedName[i] && l === letter).length < word.formattedName.split('').filter(l => l === letter).length
             ? word.formattedName.includes(letter)
