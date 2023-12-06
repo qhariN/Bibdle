@@ -5,7 +5,7 @@
   import shareSvg from '../assets/share.svg'
   import facebookSvg from '../assets/facebook.svg'
   import whatsappSvg from '../assets/whatsapp.svg'
-  import twitterSvg from '../assets/twitter.svg'
+  import xSvg from '../assets/x.svg'
   import { gameOver, gameWon } from '../lib/store'
 
   export let word: BibleWord
@@ -36,10 +36,10 @@
     )
   }
 
-  const shareOnTwitter = () => {
+  const shareOnX = () => {
     window.open(
-      `https://twitter.com/intent/tweet?url=https://bibdle.vercel.app`,
-      'twitter-share-dialog',
+      `https://x.com/intent/tweet?url=https://bibdle.vercel.app`,
+      'x-share-dialog',
       'width=800,height=600'
     )
   }
@@ -83,13 +83,13 @@
         <button on:click={shareOnWhatsapp} type="button" class="btn dark:filter-silverFoil">
           <img src={whatsappSvg} width="30" height="30" alt="whatsapp" title="Whatsapp">
         </button>
-        <button on:click={shareOnTwitter} type="button" class="btn dark:filter-silverFoil">
-          <img src={twitterSvg} width="30" height="30" alt="twitter" title="Twitter">
+        <button on:click={shareOnX} type="button" class="btn dark:filter-silverFoil">
+          <img src={xSvg} width="30" height="30" alt="x" title="X">
         </button>
       </div>
     </div>
   </div>
 </main>
 <footer class="w-full px-6 py-4 sm:px-12 sm:py-6">
-  Hecho con 💖 por <a class="underline" href="https://jhormanrus.vercel.app">Jhorman Rus</a>
+  Hecho con 💖 por <a class="underline" href="https://jhorman.vercel.app">Jhorman</a>
 </footer>

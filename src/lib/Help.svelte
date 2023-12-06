@@ -77,5 +77,5 @@
   </div>
 </main>
 <footer class="w-full px-6 py-4 sm:px-12 sm:py-6">
-  Hecho con 💖 por <a class="underline" href="https://jhormanrus.vercel.app">Jhorman Rus</a>
+  Hecho con 💖 por <a class="underline" href="https://jhorman.vercel.app">Jhorman</a>
 </footer>
