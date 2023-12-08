@@ -2,10 +2,10 @@
   import type { BibleWord } from '../interfaces/bible-word'
   import Bibdle from './Bibdle.svelte'
   import Tile from './Tile.svelte'
-  import shareSvg from '../assets/share.svg'
-  import facebookSvg from '../assets/facebook.svg'
-  import whatsappSvg from '../assets/whatsapp.svg'
-  import xSvg from '../assets/x.svg'
+  import ShareIcon from '../assets/ShareIcon.svelte'
+  import FacebookIcon from '../assets/FacebookIcon.svelte'
+  import WhatsappIcon from '../assets/WhatsappIcon.svelte'
+  import XIcon from '../assets/XIcon.svelte'
   import { gameOver, gameWon } from '../lib/store'
 
   export let word: BibleWord
@@ -74,17 +74,17 @@
     <div class="space-y-3">
       <h2>Compartir</h2>
       <div class="flex justify-center gap-3">
-        <button on:click={share} type="button" class="btn dark:filter-silverFoil">
-          <img src={shareSvg} width="30" height="30" alt="share" title="Compartir">
+        <button on:click={share} type="button" class="btn" title="Compartir">
+          <ShareIcon />
         </button>
-        <button on:click={shareOnFacebook} type="button" class="btn dark:filter-silverFoil">
-          <img src={facebookSvg} width="30" height="30" alt="facebook" title="Facebook">
+        <button on:click={shareOnFacebook} type="button" class="btn" title="Facebook">
+          <FacebookIcon />
         </button>
-        <button on:click={shareOnWhatsapp} type="button" class="btn dark:filter-silverFoil">
-          <img src={whatsappSvg} width="30" height="30" alt="whatsapp" title="Whatsapp">
+        <button on:click={shareOnWhatsapp} type="button" class="btn" title="Whatsapp">
+          <WhatsappIcon />
         </button>
-        <button on:click={shareOnX} type="button" class="btn dark:filter-silverFoil">
-          <img src={xSvg} width="30" height="30" alt="x" title="X">
+        <button on:click={shareOnX} type="button" class="btn" title="X">
+          <XIcon />
         </button>
       </div>
     </div>

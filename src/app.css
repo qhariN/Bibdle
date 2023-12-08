@@ -26,18 +26,12 @@
 
 @layer components {
   .btn {
-    @apply rounded-full p-3 bg-lavenderGray/40 dark:filter-silverFoil;
+    @apply rounded-full p-3 bg-lavenderGray/40 dark:bg-onyx dark:text-lightGray;
   }
   .btn:hover {
-    @apply bg-lavenderGray/60;
+    @apply bg-lavenderGray/60 dark:bg-onyx/80;
   }
   .btn:active {
     @apply bg-lavenderGray/80;
-  }
-}
-
-@layer utilities {
-  .filter-silverFoil {
-    filter: invert(87%) sepia(13%) saturate(6%) hue-rotate(275deg) brightness(97%) contrast(92%);
   }
 }

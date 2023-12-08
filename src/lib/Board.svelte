@@ -24,6 +24,9 @@
   })
 
   export const pushKey = (event: KeyboardEvent | CustomEvent) => {
+    if (event.target instanceof HTMLButtonElement) {
+      event.target.blur()
+    }
     if ($gameOver || $gameWon) return
     const key = (event as KeyboardEvent).key || (event as CustomEvent).detail
     const isLetter = key.length === 1 && key.match(/[ña-z]/i)

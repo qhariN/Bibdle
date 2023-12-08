@@ -1,19 +1,19 @@
 <script lang="ts">
-  import diceSvg from '../assets/dice.svg'
-  import homeSvg from '../assets/home.svg'
-  import eyeSvg from '../assets/eye.svg'
-  import darkModeSvg from '../assets/dark-mode.svg'
-  import helpSvg from '../assets/help.svg'
-  import settingsSvg from '../assets/settings.svg'
+  import DiceIcon from '../assets/DiceIcon.svelte'
+  import HomeIcon from '../assets/HomeIcon.svelte'
+  import EyeIcon from '../assets/EyeIcon.svelte'
+  import DarkModeIcon from '../assets/DarkModeIcon.svelte'
+  import HelpIcon from '../assets/HelpIcon.svelte'
+  import SettingsIcon from '../assets/SettingsIcon.svelte'
   import { view } from './store'
   import { createEventDispatcher } from 'svelte'
 
   const dispatch = createEventDispatcher()
   const randomWord = (e: MouseEvent) => {
-    dispatch('randomWord')
     if (e.target instanceof HTMLButtonElement) {
       e.target.blur()
     }
+    dispatch('randomWord')
   }
 
   let darkMode: boolean = (() => {
@@ -45,26 +45,26 @@
   <div class="flex gap-2 sm:gap-3">
     {#if $view === 'board'}
       <button on:click={randomWord} type="button" class="btn">
-        <img src={diceSvg} width="24" height="24" alt="dice" title="Palabra aleatoria">
+        <DiceIcon />
       </button>
     {:else}
-      <button on:click={() => view.set('board')} type="button" class="btn">
-        <img src={homeSvg} width="24" height="24" alt="home" title="Volver al inicio">
+      <button on:click={() => view.set('board')} type="button" class="btn" title="Volver al inicio">
+        <HomeIcon />
       </button>
     {/if}
-    <button on:click={() => view.set('result')} type="button" class="btn">
-      <img src={eyeSvg} width="24" height="24" alt="eye open" title="Mostrar palabra">
+    <button on:click={() => view.set('result')} type="button" class="btn" title="Mostrar palabra">
+      <EyeIcon />
     </button>
   </div>
   <div class="flex gap-2 sm:gap-3 ml-auto">
-    <button on:click={toggleDarkMode} type="button" class="btn">
-      <img src={darkModeSvg} width="24" height="24" alt="moon" title="Modo oscuro">
+    <button on:click={toggleDarkMode} type="button" class="btn" title="Modo oscuro">
+      <DarkModeIcon />
     </button>
-    <button on:click={() => view.set('help')} type="button" class="btn">
-      <img src={helpSvg} width="24" height="24" alt="question mark" title="Ayuda">
+    <button on:click={() => view.set('help')} type="button" class="btn" title="Ayuda">
+      <HelpIcon />
     </button>
-    <!-- <button type="button" class="btn">
-      <img src={settingsSvg} width="24" height="24" alt="gear" title="Ajustes">
+    <!-- <button type="button" class="btn" title="Ajustes">
+      <SettingsIcon />
     </button> -->
   </div>
 </header>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import backspaceSvg from '../assets/backspace.svg'
+  import BackspaceIcon from '../assets/BackspaceIcon.svelte'
   import { createEventDispatcher } from 'svelte';
   import { words } from './store'
 
@@ -22,7 +22,7 @@
       {#each row as key}
         <button on:click={() => pushKey(key)} class:enter={key === 'Enter'} class:key-used={isUsedKey(key)} type="button">
           {#if key === 'Backspace'}
-            <img src={backspaceSvg} width="20" height="20" alt="backspace" class="mb-[2px] mr-[4px] dark:filter-silverFoil">
+            <BackspaceIcon />
           {:else}
             {key}
           {/if}

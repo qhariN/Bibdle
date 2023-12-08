@@ -1,10 +1,10 @@
 <script>
   import Bibdle from './Bibdle.svelte'
-  import diceSvg from '../assets/dice.svg'
-  import homeSvg from '../assets/home.svg'
-  import eyeSvg from '../assets/eye.svg'
-  import darkModeSvg from '../assets/dark-mode.svg'
-  import helpSvg from '../assets/help.svg'
+  import DiceIcon from '../assets/DiceIcon.svelte'
+  import HomeIcon from '../assets/HomeIcon.svelte'
+  import EyeIcon from '../assets/EyeIcon.svelte'
+  import DarkModeIcon from '../assets/DarkModeIcon.svelte'
+  import HelpIcon from '../assets/HelpIcon.svelte'
 </script>
 
 <main class="grow self-center flex flex-col items-center gap-7 max-w-full w-[32rem] px-4">
@@ -18,32 +18,33 @@
     <p>En la parte superior de la pantalla encontrarás una barra de navegación que te permite acceder a las distintas secciones de la aplicación. A continuación te explicamos para qué sirve cada uno de los botones de esta barra:</p>
     <div class="space-y-2 sm:mx-4">
       <div class="flex items-center gap-3">
-        <button type="button" class="btn">
-          <img src={homeSvg} width="24" height="24" alt="home" title="Volver al inicio">
+        <button type="button" class="btn" title="Volver al inicio">
+          <HomeIcon />
         </button>
         <p>Este botón te llevará al tablero de juego.</p>
       </div>
       <div class="flex items-center gap-3">
         <button type="button" class="btn">
-          <img src={diceSvg} width="24" height="24" alt="dice" title="Palabra aleatoria">
+          <DiceIcon />
+          <!-- <img src={diceSvg} width="24" height="24" alt="dice" title="Palabra aleatoria"> -->
         </button>
         <p>Está disponible solo en el tablero de juego, úsalo para generar una nueva palabra.</p>
       </div>
       <div class="flex items-center gap-3">
-        <button type="button" class="btn">
-          <img src={eyeSvg} width="24" height="24" alt="eye open" title="Mostrar palabra">
+        <button type="button" class="btn" title="Mostrar palabra">
+          <EyeIcon />
         </button>
         <p>Usa este botón para revelar la palabra que debes adivinar.</p>
       </div>
       <div class="flex items-center gap-3">
-        <button type="button" class="btn">
-          <img src={darkModeSvg} width="24" height="24" alt="moon" title="Modo oscuro">
+        <button type="button" class="btn" title="Modo oscuro">
+          <DarkModeIcon />
         </button>
         <p>Puedes activar y desactivar el modo oscuro de la aplicación.</p>
       </div>
       <div class="flex items-center gap-3">
-        <button type="button" class="btn">
-          <img src={helpSvg} width="24" height="24" alt="question mark" title="Ayuda">
+        <button type="button" class="btn" title="Ayuda">
+          <HelpIcon />
         </button>
         <p>Usa este botón para ver las instrucciones del juego.</p>
       </div>
